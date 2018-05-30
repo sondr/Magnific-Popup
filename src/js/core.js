@@ -702,7 +702,7 @@ MagnificPopup.prototype = {
 		var closeOnContent = mfp.st.closeOnContentClick;
 		var closeOnBg = mfp.st.closeOnBgClick;
 
-		if(closeOnContent && closeOnBg) {
+		if(closeOnContent === true && closeOnBg === true) {
 			return true;
 		} else {
 
@@ -719,8 +719,11 @@ MagnificPopup.prototype = {
 						return true;
 					}
 				}
-			} else if(closeOnContent) {
+			} else if(closeOnContent === true) {
 				return true;
+			}else if(closeOnContent && typeof(closeOnContent) === 'function'){
+				closeOnContent(target);
+				return false;
 			}
 
 		}
